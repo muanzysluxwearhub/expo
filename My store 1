@@ -1,0 +1,111 @@
+npx create-expo-app muanzyluxwearhub
+cd muanzyluxwearhub
+// MuanzyluxLoginScreen.js
+import React, { useState } from 'react';
+import {
+  View, Text, TextInput, TouchableOpacity, StyleSheet, ImageBackground, Switch
+} from 'react-native';
+import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
+
+export default function MuanzyluxLoginScreen() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [isSeller, setIsSeller] = useState(false);
+
+  return (
+    <ImageBackground
+      source={require('./assets/shopping-blur.jpg')} // Replace with your image
+      style={styles.background}
+      blurRadius={5}
+    >
+      <View style={styles.container}>
+        <Text style={styles.logo}>muanzyluxwearhub</Text>
+        <Text style={styles.welcome}>Welcome back! Shop smarter, faster, anywhere.</Text>
+
+        <View style={styles.inputContainer}>
+          <FontAwesome name="envelope" size={20} color="#555" />
+          <TextInput
+            style={styles.input}
+            placeholder="Email or Phone Number"
+            value={email}
+            onChangeText={setEmail}
+            keyboardType="email-address"
+          />
+        </View>
+
+        <View style={styles.inputContainer}>
+          <MaterialIcons name="lock" size={20} color="#555" />
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            secureTextEntry={!showPassword}
+            value={password}
+            onChangeText={setPassword}
+          />
+          <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+            <MaterialIcons name={showPassword ? "visibility" : "visibility-off"} size={20} color="#555" />
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.roleSelector}>
+          <Text style={styles.roleText}>Customer</Text>
+          <Switch
+            value={isSeller}
+            onValueChange={setIsSeller}
+            thumbColor="#007AFF"
+          />
+          <Text style={styles.roleText}>Seller</Text>
+        </View>
+
+        <TouchableOpacity style={styles.loginButton}>
+          <Text style={styles.loginText}>Login</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.signUpButton}>
+          <Text style={styles.signUpText}>Sign Up</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity>
+          <Text style={styles.forgot}>Forgot Password?</Text>
+        </TouchableOpacity>
+
+        <View style={styles.socialContainer}>
+          <TouchableOpacity style={styles.socialButton}>
+            <FontAwesome name="google" size={20} color="#DB4437" />
+            <Text style={styles.socialText}>Continue with Google</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.socialButton}>
+            <FontAwesome name="facebook" size={20} color="#4267B2" />
+            <Text style={styles.socialText}>Continue with Facebook</Text>
+          </TouchableOpacity>
+        </View>
+
+        <Text style={styles.footer}>
+          By logging in, you agree to our <Text style={styles.link}>Terms</Text> & <Text style={styles.link}>Privacy Policy</Text>.
+        </Text>
+      </View>
+    </ImageBackground>
+  );
+}
+
+const styles = StyleSheet.create({
+  background: { flex: 1, justifyContent: 'center' },
+  container: { padding: 20, backgroundColor: 'rgba(255,255,255,0.9)', margin: 20, borderRadius: 10 },
+  logo: { fontSize: 28, fontWeight: 'bold', textAlign: 'center', marginBottom: 10, color: '#007AFF' },
+  welcome: { textAlign: 'center', marginBottom: 20, fontSize: 16, color: '#333' },
+  inputContainer: { flexDirection: 'row', alignItems: 'center', borderBottomWidth: 1, marginBottom: 15 },
+  input: { flex: 1, padding: 10 },
+  roleSelector: { flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginBottom: 20 },
+  roleText: { marginHorizontal: 10 },
+  loginButton: { backgroundColor: '#007AFF', padding: 15, borderRadius: 8, marginBottom: 10 },
+  loginText: { color: '#fff', textAlign: 'center', fontWeight: 'bold' },
+  signUpButton: { borderColor: '#007AFF', borderWidth: 1, padding: 15, borderRadius: 8, marginBottom: 10 },
+  signUpText: { color: '#007AFF', textAlign: 'center', fontWeight: 'bold' },
+  forgot: { textAlign: 'right', color: '#555', marginBottom: 20 },
+  socialContainer: { marginBottom: 20 },
+  socialButton: { flexDirection: 'row', alignItems: 'center', marginBottom: 10 },
+  socialText: { marginLeft: 10 },
+  footer: { textAlign: 'center', fontSize: 12, color: '#555' },
+  link: { color: '#007AFF', textDecorationLine: 'underline' },
+});
